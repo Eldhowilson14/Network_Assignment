@@ -1,0 +1,7 @@
+[localhost]
+localhost ansible_connection=172.168.10.2
+
+# BEGIN ANSIBLE MANAGED BLOCK
+[target]
+172.168.10.2 ansible_user=root ansible_ssh_pass=root ansible_connection=ssh
+# END ANSIBLE MANAGED BLOCK
