@@ -1,5 +1,5 @@
 ---
-- name: Deploy Docker container with React app using Apache
+- name: Deploy Docker container using Apache server
   hosts: localhost
   gather_facts: no
   tasks:
@@ -30,21 +30,15 @@
           - name: apache_network
             ipv4_address: 172.168.10.2
             
-    - name: Copy React app build files to the host
+    - name: Copy build files to the host
       copy:
-        src: /home/kali/network/index.html
+        src: /home/eldho/Network_Assignment/.git/Network_Assignment/index.html
         dest: /tmp/network
 
     - name: Retrieving IP
       command: docker inspect --format="{{'{{'}}range .NetworkSettings.Networks{{'}}'}}{{'{{'}}.IPAddress{{'}}'}}{{'{{'}}end{{'}}'}}" react_container
       register: ip
     
-    - name: Inventory update
-      blockinfile:
-        path: /home/kali/network/inventory.txt
-        block: |
-                [target]
-                {{ ip.stdout }} ansible_user=root ansible_ssh_pass=root ansible_connection=ssh
 
     - debug:
         msg: "{{ ip.stdout }}"
