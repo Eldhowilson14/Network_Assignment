@@ -1,6 +1,6 @@
 ---
 - name: Deploy Docker container using Apache server
-  hosts: localhost
+  hosts: kali-machine 
   gather_facts: no
   tasks:
     - name: Install Docker Python module
